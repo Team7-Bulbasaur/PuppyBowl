@@ -32,13 +32,6 @@ const fetchSinglePlayer = async (playerId) => {
 
 const addNewPlayer = async (playerObj) => {
   try { 
-    // const response = await fetch(APIURL, {
-    //     method: "POST", 
-    //     body: json.stringify({playerId})
-    // })
-
-    // const newPlayer =await response.json();
-    // console.log(newPlayer)
 
   } catch (err) {
     console.error("Oops, something went wrong with adding that player!", err);
@@ -139,31 +132,6 @@ const renderAllPlayers =  async (playersResponse) => {
   }
 };
 
-//SOME code for creating new players
-// function createNewPlayer(){
-//     const formHtml =`
-//     <form>
-//     <label for = "name">Name</label>
-//     <input type="text" id="name" name="name" />
-//     <button type="submit">Create</button>
-//     </form>` 
-
-//     newPlayerFormContainer.innerHTML = formHtml
-//     const form = newPlayerFormContainer.querySelector("form")
-//     form.addEventListener("click", async (evnt) => {
-//         evnt.preventDefault()
-
-//         let name = form.name.valueOf
-//         console.log("name", name)
-
-//         addNewPlayer(name)
-
-//         const allPlayers =await fetchAllPlayers()
-//         renderNewPlayerForm(allPlayers)
-
-//         form.name.value = ""
-//     })
-// }
 
 /**
  * It renders a form to the DOM, and when the form is submitted, it adds a new player to the database,

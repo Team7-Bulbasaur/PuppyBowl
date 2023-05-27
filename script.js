@@ -22,13 +22,17 @@ const fetchAllPlayers = async () => {
 
 const fetchSinglePlayer = async (playerId) => {
   try {
+    const response = await fetch(`${APIURL}/${playerId}`)
+    const singlePlayer = await response.json()
+    return singlePlayer;
   } catch (err) {
     console.error(`Oh no, trouble fetching player #${playerId}!`, err);
   }
 };
 
 const addNewPlayer = async (playerObj) => {
-  try {
+  try { 
+
   } catch (err) {
     console.error("Oops, something went wrong with adding that player!", err);
   }
@@ -36,6 +40,8 @@ const addNewPlayer = async (playerObj) => {
 
 const removePlayer = async (playerId) => {
   try {
+   
+
   } catch (err) {
     console.error(
       `Whoops, trouble removing player #${playerId} from the roster!`,
@@ -89,8 +95,30 @@ const renderAllPlayers =  async (playersResponse) => {
       const detailsButton = playersElement.querySelector(".details-button");
       detailsButton.addEventListener("click", async (event) => {
         // your code here
+        event.preventDefault()
+        const singlePlayer = await fetchSinglePlayer(player.id)
+        playerContainer.innerHTML = `
+                    <h2>${player.name}</h2>
+                    <p>ID: ${player.id}</p>
+                    <p>Breed: ${player.breed}</p>
+                    <p>Player Status: ${player.status}</p>
+                    <img src="${player.imageUrl}"></p>
+                    <p>Created: ${player.createdAt}</p>
+                    <p>Last Update: ${player.updatedAt }</p>
+                    <p>Team: ${player.teamId} </p>
+                    <button class='backButton' id="backButton">Back to the Roster</button>
+        `
 
-      });
+        const backButton = playerContainer.querySelector('.backButton');
+        backButton.addEventListener('click', async (evt)=> {
+            event.preventDefault()
+
+            const allPlayers = await fetchAllPlayers()
+            renderAllPlayers(allPlayers);
+        })
+
+      })
+      playersElement.appendChild(detailsButton)
 
       // delete player
       const deleteButton = playersElement.querySelector(".delete-button");
@@ -103,6 +131,7 @@ const renderAllPlayers =  async (playersResponse) => {
     console.error("Uh oh, trouble rendering players!", err);
   }
 };
+
 
 /**
  * It renders a form to the DOM, and when the form is submitted, it adds a new player to the database,
@@ -119,6 +148,7 @@ const init = async () => {
   const playersResponse = await fetchAllPlayers();
   renderAllPlayers(playersResponse);
 
+//   createNewPlayer();
   //renderNewPlayerForm();
 };
 

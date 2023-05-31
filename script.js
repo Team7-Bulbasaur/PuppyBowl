@@ -40,8 +40,11 @@ const addNewPlayer = async (playerObj) => {
 
 const removePlayer = async (playerId) => {
   try {
-   
-
+    const resp = await fetch(`${APIURL}/${playerId}`, {
+      method: "DELETE"
+    })
+    const deletedSinglePlayer = await resp.json()
+    console.log(deletedSinglePlayer)
   } catch (err) {
     console.error(
       `Whoops, trouble removing player #${playerId} from the roster!`,
@@ -124,7 +127,12 @@ const renderAllPlayers =  async (playersResponse) => {
       const deleteButton = playersElement.querySelector(".delete-button");
       deleteButton.addEventListener("click", async (event) => {
         // your code here
+        event.preventDefault (
+        await removePlayer(player.id)
+        );
 
+        playersElement.appendChild(deleteButton)
+        
       });
     });
   } catch (err) {

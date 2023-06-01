@@ -43,7 +43,11 @@ const addNewPlayer = async (playerObj) => {
       body: JSON.stringify(playerObj),
     });
     const newPlayer = await response.json();
-    console.log(newPlayer);
+    if (newPlayer.success) {
+      alert('New Player Successfully Added');
+    } else {
+      alert("Oops, there's a problem, check the data you sent.");
+    }
     init();
   } catch (err) {
     console.error("Oops, something went wrong with adding that player!", err);
@@ -195,12 +199,14 @@ const addPlayerButton = document.getElementById("addPlayer");
 
 addPlayerButton.addEventListener("click", async (event) => {
     event.preventDefault();
-    addNewPlayerForm(); 
+    addNewPlayerForm();
+   
 });
   const addNewPlayerForm = async () => {
     let teams = "";
     let obtTeams= await fetchAllTeams();
     teams = renderSelectTeams(obtTeams);
+    playerContainer.innerHTML = ``;
     newPlayerFormContainer.innerHTML = `
     <form>
     <h2 class="subTitile">Create New Player</h2>
@@ -224,6 +230,7 @@ addPlayerButton.addEventListener("click", async (event) => {
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
+
         let newPlayerData = {
             name: form.name.value,
             breed: form.breed.value,
@@ -232,7 +239,7 @@ addPlayerButton.addEventListener("click", async (event) => {
             teamId: form.teamid.value
         };
         await addNewPlayer (newPlayerData);
-        console.log(newPlayerData);
+        newPlayerFormContainer.innerHTML = ``;
 
         const newPlayer = await fetchAllPlayers();
         renderAllPlayers(newPlayer);

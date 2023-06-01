@@ -40,7 +40,7 @@ const addNewPlayer = async (playerObj) => {
       headers: {
         'Content-Type' : 'application/json'
       },
-      body: JSON.stringify({playerObj}),
+      body: JSON.stringify(playerObj),
     });
     const newPlayer = await response.json();
     console.log(newPlayer);
@@ -210,8 +210,8 @@ addPlayerButton.addEventListener("click", async (event) => {
     <input type="text" id="breed" name="breed" placeholder="Breed"> <br>
     <label for="status">Status</label> <br>
     <select name="status" id="status">
-    <option value="Field">Field</option>
-    <option value="Bench">Bench</option> 
+    <option value="field">field</option>
+    <option value="bench">bench</option> 
     </select> <br>
     <label for="imageUrl">Image URL</label> <br>
     <input type="text" id="imageUrl" name="imageUrl" placeholder="Image URL"> <br>

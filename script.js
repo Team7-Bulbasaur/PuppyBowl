@@ -1,10 +1,12 @@
 const playerContainer = document.getElementById("all-players-container");
 const newPlayerFormContainer = document.getElementById("new-player-form");
 
+
 // Add your cohort name to the cohortName variable below, replacing the 'COHORT-NAME' placeholder
 const cohortName = "2302-ACC-PT-WEB-PT-C";
 // Use the APIURL variable for fetch requests
 const APIURL = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/players`;
+const APIURLTEAMS = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/teams`;
 
 /**
  * It fetches all players from the API and returns them
@@ -32,7 +34,17 @@ const fetchSinglePlayer = async (playerId) => {
 
 const addNewPlayer = async (playerObj) => {
   try { 
-
+    console.log(playerObj);
+    const response = await fetch(APIURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type' : 'application/json'
+      },
+      body: JSON.stringify({playerObj}),
+    });
+    const newPlayer = await response.json();
+    console.log(newPlayer);
+    init();
   } catch (err) {
     console.error("Oops, something went wrong with adding that player!", err);
   }
@@ -74,7 +86,6 @@ const renderAllPlayers =  async (playersResponse) => {
   try {
    // console.log(playersResponse.data.players);
     let playerList = playersResponse.data.players;
-    console.log(playerList);
     playerContainer.innerHTML = "";
     playerList.forEach((player) => {
       const playersElement = document.createElement("div");
@@ -131,8 +142,39 @@ const renderAllPlayers =  async (playersResponse) => {
     console.error("Uh oh, trouble rendering players!", err);
   }
 };
+/**
+ * It fetches all Teams from the API and returns them
+ * 
+ * @returns An arry of objects with the teams
+ */
+const fetchAllTeams = async () => {
+  try {
+    const response = await fetch(APIURLTEAMS);
+    const teams = await response.json();
+    
+    return teams;
+  } catch (err) {
+    console.error("Uh oh, trouble fetching Teams!", err);
+  }
+};
+function renderSelectTeams(teams){
 
+  try {
+    let render = `<select name="teamid" id="teamid">
+    `;
+    for (const t of teams.data.teams ) {
+      render = render + `<option value="${t.id}">${t.id}</option>
+      `
+    }
+  
+    render = render + '</select>';
+    return render;
+  } catch (error) {
+    `Whoops, trouble rendering teams  `,
+    err
+  }
 
+}
 /**
  * It renders a form to the DOM, and when the form is submitted, it adds a new player to the database,
  * fetches all players from the database, and renders them to the DOM.
@@ -147,9 +189,62 @@ const renderNewPlayerForm = () => {
 const init = async () => {
   const playersResponse = await fetchAllPlayers();
   renderAllPlayers(playersResponse);
-
+}
 //   createNewPlayer();
-  //renderNewPlayerForm();
+const addPlayerButton = document.getElementById("addPlayer");
+
+addPlayerButton.addEventListener("click", async (event) => {
+    event.preventDefault();
+    addNewPlayerForm(); 
+});
+  const addNewPlayerForm = async () => {
+    let teams = "";
+    let obtTeams= await fetchAllTeams();
+    teams = renderSelectTeams(obtTeams);
+    newPlayerFormContainer.innerHTML = `
+    <form>
+    <h2 class="subTitile">Create New Player</h2>
+    <label for="name">Name</label> <br>
+    <input type="text" id="name" placeholder="Name"> <br>
+    <label for="breed">Breed</label> <br>
+    <input type="text" id="breed" name="breed" placeholder="Breed"> <br>
+    <label for="status">Status</label> <br>
+    <select name="status" id="status">
+    <option value="Field">Field</option>
+    <option value="Bench">Bench</option> 
+    </select> <br>
+    <label for="imageUrl">Image URL</label> <br>
+    <input type="text" id="imageUrl" name="imageUrl" placeholder="Image URL"> <br>
+    <label for="teamid">TeamID</label> <br> ` + 
+    teams + ` <br>
+    <button type="submit">Add Player</button>
+    </form>
+    `;
+    let form = newPlayerFormContainer.querySelector('form');
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        let newPlayerData = {
+            name: form.name.value,
+            breed: form.breed.value,
+            status: form.status.value,
+            imageUrl: form.imageUrl.value,
+            teamId: form.teamid.value
+        };
+        await addNewPlayer (newPlayerData);
+        console.log(newPlayerData);
+
+        const newPlayer = await fetchAllPlayers();
+        renderAllPlayers(newPlayer);
+
+            form.name.value = '';
+            form.breed.value = '';
+            form.status.value = '';
+            form.imageUrl.value = '';
+            form.teamid.value = '';
+        
+    });
 };
+
 
 init();

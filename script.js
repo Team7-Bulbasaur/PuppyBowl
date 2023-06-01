@@ -234,7 +234,7 @@ const addNewPlayerForm = async () => {
     <input type="text" id="imageUrl" name="imageUrl" placeholder="Image URL"> <br>
     <label for="teamid">TeamID</label> <br> ` +
     teams +
-    ` <br>
+    ` <br> <br>
     <button type="submit">Add Player</button>
     </form>
     `;

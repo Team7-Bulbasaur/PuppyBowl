@@ -219,23 +219,32 @@ const addNewPlayerForm = async () => {
   playerContainer.innerHTML = ``;
   newPlayerFormContainer.innerHTML =
     `
-    <form>
-    <h2 class="subTitile">Create New Player</h2>
-    <label for="name">Name</label> <br>
-    <input type="text" id="name" placeholder="Name"> <br>
-    <label for="breed">Breed</label> <br>
-    <input type="text" id="breed" name="breed" placeholder="Breed"> <br>
-    <label for="status">Status</label> <br>
-    <select name="status" id="status">
-    <option value="field">field</option>
-    <option value="bench">bench</option> 
-    </select> <br>
-    <label for="imageUrl">Image URL</label> <br>
-    <input type="text" id="imageUrl" name="imageUrl" placeholder="Image URL"> <br>
-    <label for="teamid">TeamID</label> <br> ` +
-    teams +
-    ` <br>
-    <button type="submit">Add Player</button>
+    <form class="new-player-form">
+      <h2 class="subTitle">Create New Player</h2>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Name" required>
+      </div>
+      <div class="form-group">
+        <label for="breed">Breed</label>
+        <input type="text" id="breed" name="breed" placeholder="Breed" required>
+      </div>
+      <div class="form-group">
+        <label for="status">Status</label>
+        <select name="status" id="status" required>
+          <option value="field">Field</option>
+          <option value="bench">Bench</option> 
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="imageUrl">Image URL</label>
+        <input type="text" id="imageUrl" name="imageUrl" placeholder="Image URL" required>
+      </div>
+      <div class="form-group">
+        <label for="teamid">TeamID</label>
+        ${teams}
+      </div>
+      <button type="submit">Add Player</button>
     </form>
     `;
   let form = newPlayerFormContainer.querySelector("form");

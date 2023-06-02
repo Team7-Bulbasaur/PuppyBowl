@@ -219,6 +219,7 @@ const addNewPlayerForm = async () => {
   playerContainer.innerHTML = ``;
   newPlayerFormContainer.innerHTML =
     `
+
     <form class="new-player-form">
       <h2 class="subTitle">Create New Player</h2>
       <div class="form-group">
@@ -245,6 +246,7 @@ const addNewPlayerForm = async () => {
         ${teams}
       </div>
       <button type="submit">Add Player</button>
+
     </form>
     `;
     let form = newPlayerFormContainer.querySelector("form");

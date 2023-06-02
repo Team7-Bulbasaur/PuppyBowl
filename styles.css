@@ -63,6 +63,7 @@ button {
 
 h2{
   font-size: 25px;
+
 }
 /* CSS for add puppies form */
 .new-player-form {
@@ -105,3 +106,4 @@ button[type="submit"]:hover {
   background-color: #F6B40D;
 }
 /* END CSS FOR ADD PUPPIES FORM */
+

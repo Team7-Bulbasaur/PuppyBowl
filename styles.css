@@ -63,4 +63,47 @@ button {
 
 h2{
   font-size: 25px;
+
 }
+/* CSS for add puppies form */
+.new-player-form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.subTitle {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #F6B40D;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #F6B40D;
+}
+/* END CSS FOR ADD PUPPIES FORM */
+

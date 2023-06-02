@@ -247,34 +247,34 @@ const addNewPlayerForm = async () => {
       <button type="submit">Add Player</button>
     </form>
     `;
-  let form = newPlayerFormContainer.querySelector("form");
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    let newPlayerData = {
-      name: form.name.value,
-      breed: form.breed.value,
-      status: form.status.value,
-      imageUrl: form.imageUrl.value,
-      teamId: form.teamid.value,
-    };
-    await addNewPlayer(newPlayerData);
-    newPlayerFormContainer.innerHTML = ``;
-
-    const newPlayer = await fetchAllPlayers();
-    renderAllPlayers(newPlayer);
-
-    form.name.value = "";
-    form.breed.value = "";
-    form.status.value = "";
-    form.imageUrl.value = "";
-    form.teamid.value = "";
-  });
-};
-
-const init = async () => {
-  const playersResponse = await fetchAllPlayers();
-  renderAllPlayers(playersResponse);
-};
-
-init();
+    let form = newPlayerFormContainer.querySelector("form");
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+  
+      let newPlayerData = {
+        name: form.name.value,
+        breed: form.breed.value,
+        status: form.status.value,
+        imageUrl: form.imageUrl.value,
+        teamId: form.teamid.value,
+      };
+      await addNewPlayer(newPlayerData);
+      newPlayerFormContainer.innerHTML = ``;
+  
+      const newPlayer = await fetchAllPlayers();
+      renderAllPlayers(newPlayer);
+  
+      form.name.value = "";
+      form.breed.value = "";
+      form.status.value = "";
+      form.imageUrl.value = "";
+      form.teamid.value = "";
+    });
+  };
+  
+  const init = async () => {
+    const playersResponse = await fetchAllPlayers();
+    renderAllPlayers(playersResponse);
+  };
+  
+  init();

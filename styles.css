@@ -1,32 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Rubik+Puddles&display=swap');
 *{
-    padding: 10px;
     margin: 0;
+    padding: 20px;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
 
 }
+
+
 
 /* NAVIGATION BAR */
 
 /* Add a black background color to the top navigation */
 header {
-    background-color: #333;
+    background-color: #1E4775;
     overflow: hidden;
-    color:#f2f2f2
+    color:#FFFFFF
   }
 nav{
-   float: right ;
+   float: left ;
 }
 
   
   /* Style the links inside the navigation bar */
 nav a {
-    float: left;
+    /* float: 0; */
     color: #f2f2f2;
     text-align: center;
-    padding: 14px 16px;
+    padding: 20px 12vw;
     text-decoration: none;
     font-size: 17px;
+    display: inline-block;
 }
   
   /* Change the color of links on hover */
@@ -41,6 +46,24 @@ nav a.active {
     color: white;
   }
 
+h1{
+  font-family: 'Rubik Puddles', cursive;
+  font-size: 60px;
+}
+
+/* Button Design */
+
+button {
+  border-radius: 15px;
+  height: 3rem;
+  width: 15rem;
+  background-color:  #F6B40D;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h2{
+  font-size: 25px;
+}
 /* CSS for add puppies form */
 .new-player-form {
   max-width: 400px;
@@ -81,3 +104,4 @@ button[type="submit"] {
 button[type="submit"]:hover {
   background-color: #45a049;
 }
+/* END CSS FOR ADD PUPPIES FORM */

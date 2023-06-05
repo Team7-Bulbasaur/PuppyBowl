@@ -95,8 +95,10 @@ const removePlayer = async (playerId) => {
  */
 const renderAllPlayers = async (playersResponse) => {
   try {
+    console.log(playersResponse);
     // console.log(playersResponse.data.players);
     let playerList = playersResponse.data.players;
+    console.log(playerList)
     playerContainer.innerHTML = "";
     playerList.forEach((player) => {
       const playersElement = document.createElement("div");
@@ -273,7 +275,61 @@ const addNewPlayerForm = async () => {
       form.teamid.value = "";
     });
   };
+  // generate team page
+  function generateTeamListPage(teams) {
+    const teamListContainer = document.getElementById('all-players-container');
+    teamListContainer.innerHTML = '';
   
+    const header = document.createElement('h1');
+    header.innerText = 'Teams';
+    teamListContainer.appendChild(header);
+  
+    const teamList = document.createElement('ul');
+    teamList.classList.add('team-list');
+    teamListContainer.appendChild(teamList);
+  
+    teams.forEach((team) => {
+      const teamItem = document.createElement('li');
+      const teamLink = document.createElement('a');
+      teamLink.href = `#${team.id}`;
+      teamLink.innerText = `Team ${team.id}`;
+      teamItem.appendChild(teamLink);
+      teamList.appendChild(teamItem);
+  
+      teamLink.addEventListener('click', async (event) => {
+        event.preventDefault();
+        const playersResponse = await fetchAllPlayers();
+        const players = playersResponse.data.players;
+        const teamPlayers = players.filter((player) => player.teamId === team.id);
+        const playerNames = teamPlayers.map((player) => player.name);
+        alert(playerNames.join(', '));
+      });
+    });
+  }
+
+// Handle Show Teams link click event
+function handleShowTeamsClick(event) {
+  event.preventDefault();
+  fetch(APIURLTEAMS)
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        generateTeamListPage(data.data.teams);
+      } else {
+        console.log('Error: Unable to fetch teams data');
+      }
+    })
+    .catch((error) => {
+      console.error('Error fetching teams data:', error);
+    });
+}
+
+// Add event listener for Show Teams link click
+const showTeamsLink = document.getElementById('showTeams');
+showTeamsLink.addEventListener('click', handleShowTeamsClick);
+
+
+
   const init = async () => {
     const playersResponse = await fetchAllPlayers();
     renderAllPlayers(playersResponse);

@@ -105,5 +105,13 @@ button[type="submit"] {
 button[type="submit"]:hover {
   background-color: #F6B40D;
 }
+
+.team-list {
+  list-style: none; /* Remove default bullets/numbers */
+}
+
+.team-list li {
+  margin-bottom: 10px;
+}
 /* END CSS FOR ADD PUPPIES FORM */
 

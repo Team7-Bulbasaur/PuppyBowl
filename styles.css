@@ -13,7 +13,8 @@
 header {
   background-color: #1E4775;
   overflow: hidden;
-  color:#FFFFFF
+  color: #FFFFFF;
+  border-radius: 2vmin;
 }
 
 nav{
@@ -46,6 +47,11 @@ nav a.active {
 h1 {
   font-family: 'Rubik Puddles', cursive;
   font-size: 60px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #f2f2f2;
+  background-color: #1E4775;
+  border-radius: 2vmin;
 }
 
 /* Button Design */
@@ -213,4 +219,19 @@ body {
 img {
   max-width: 600px;
   max-height: 600px;
+}
+/*SHOW TEAM BUTTONS*/
+a {
+  color: #f2f2f2;
+  background-color: #1E4775;
+  border-radius: 2vmin;
+  text-align: center;
+  padding: 20px 12vw;
+  text-decoration: none;
+  font-size: 17px;
+  display: inline-block;
+}
+a:hover {
+  background-color: #ddd;
+  color: black;
 }

@@ -104,13 +104,13 @@ const renderAllPlayers = async (playersResponse) => {
       const playersElement = document.createElement("div");
       playersElement.classList.add("player");
       playersElement.innerHTML = `
-                    <h2>${player.name}</h2>
-                    <p>${player.breed}</p>
-                    <p>${player.status}</p>
-                    <img src="${player.imageUrl}"></p>
-                    <p>${player.createdAt}</p>
-                    <p>${player.updatedAt}</p>
-                    <button class="details-button" data-id="${player.id}" >See Details</button>
+      <div class= "card">
+      <h2 class="player-name">${player.name}</h2>
+      <p class="player-breed">${player.breed}</p>
+      <p class="player-status">${player.status}</p>
+      <img class="player-image" src="${player.imageUrl}">
+      <button class="details-button" data-id="${player.id}" >See Details</button>
+      </div>
                     
                 `;
       playerContainer.appendChild(playersElement);

@@ -5,55 +5,50 @@
   box-sizing: border-box;
   text-align: center;
   font-family: 'Poppins', sans-serif;
-
-
 }
-
-
 
 /* NAVIGATION BAR */
 
-/* Add a black background color to the top navigation */
+/* Add a background color to the top navigation */
 header {
-    background-color: #1E4775;
-    overflow: hidden;
-    color:#FFFFFF
-  }
+  background-color: #1E4775;
+  overflow: hidden;
+  color:#FFFFFF
+}
+
 nav{
-   float: left ;
+  float: left ;
 }
-
   
-  /* Style the links inside the navigation bar */
+/* Style the links inside the navigation bar */
 nav a {
-    /* float: 0; */
-    color: #f2f2f2;
-    text-align: center;
-    padding: 20px 12vw;
-    text-decoration: none;
-    font-size: 17px;
-    display: inline-block;
+  /* float: 0; */
+  color: #f2f2f2;
+  text-align: center;
+  padding: 20px 12vw;
+  text-decoration: none;
+  font-size: 17px;
+  display: inline-block;
 }
   
-  /* Change the color of links on hover */
-  nav a:hover {
-    background-color: #ddd;
-    color: black;
-  }
+/* Change the color of links on hover */
+nav a:hover {
+  background-color: #ddd;
+  color: black;
+}
   
-  /* Add a color to the active/current link */
+/* Add a color to the active/current link */
 nav a.active {
-    background-color: #04AA6D;
-    color: white;
-  }
+  background-color: #04AA6D;
+  color: white;
+}
 
-h1{
+h1 {
   font-family: 'Rubik Puddles', cursive;
   font-size: 60px;
 }
 
 /* Button Design */
-
 button {
   border-radius: 15px;
   height: 3rem;
@@ -65,11 +60,15 @@ button {
   cursor: pointer;
 }
 
+button:hover {
+  background-color: #1E4775;
+  color: #F6B40D;
+}
 
 h2{
   font-size: 25px;
-
 }
+
 /* CSS for add puppies form */
 .new-player-form {
   max-width: 400px;
@@ -147,8 +146,6 @@ button[type="submit"]:hover {
   }
 }
 
-
-
 .player-name {
   position: absolute;
   inset: auto auto 50px 30px;
@@ -180,7 +177,6 @@ button[type="submit"]:hover {
   color: #800000;
 }
 
-
 .player-image {
   position: absolute;
   object-fit: cover;
@@ -190,23 +186,11 @@ button[type="submit"]:hover {
   left: 0;
   opacity: .5;
   transition: opacity 1s ease-out;
-
 }
 
-.player-created,
-.player-updated {
+.player-created, .player-updated {
   font-size: 12px;
   color: black;
-}
-
-.details-button {
-  background-color: #F6B40D;
-
-  color: white;
-
-  padding: 5px 10px;
-  border: none;
-  cursor: pointer;
 }
 
 body {
@@ -216,27 +200,17 @@ body {
   align-items: center;
   padding: 50px;
   font-family: 'Roboto', sans-serif;
-}
-
-
-/* Football Background */
-
-body{
   background-image: url(https://images.unsplash.com/photo-1610729866389-fbf90649c302?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80);
   background-position: center;
   background-size: contain;
-  
-
 }
 
-.delete-button {
-  border-radius: 15px;
-  height: 3rem;
-  width: 15rem;
-  background-color:  #f60d0d;
-  font-family: Arial, Helvetica, sans-serif;
-  padding: 5px 10px;
-  border: none;
-  cursor: pointer;
+.delete-button:hover {
+  color: #F6B40D;
+  background-color: red;
 }
-*
+
+img {
+  max-width: 600px;
+  max-height: 600px;
+}

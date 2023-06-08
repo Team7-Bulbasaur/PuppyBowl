@@ -4,3 +4,5 @@ export function teamUrl() {
 
   return {APIURL, APIURLTEAMS};
 }
+
+//Kento, Make sure to ask me in class how is this working and why it was not working before.

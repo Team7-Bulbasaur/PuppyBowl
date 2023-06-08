@@ -1,11 +1,12 @@
-const playerContainer = document.getElementById("all-players-container");
-const newPlayerFormContainer = document.getElementById("new-player-form");
+import {teamUrl} from './teamsUrl.js';
+const playerContainer = document.getElementById('all-players-container');
+const newPlayerFormContainer = document.getElementById('new-player-form');
+const urls = teamUrl();
 
 // Add your cohort name to the cohortName variable below, replacing the 'COHORT-NAME' placeholder
-const cohortName = "2302-ACC-PT-WEB-PT-C";
 // Use the APIURL variable for fetch requests
-const APIURL = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/players`;
-const APIURLTEAMS = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/teams`;
+// const APIURL = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/players`;
+// const APIURLTEAMS = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/teams`;
 
 /**
  * It fetches all players from the API and returns them
@@ -13,17 +14,17 @@ const APIURLTEAMS = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/team
  */
 const fetchAllPlayers = async () => {
   try {
-    const response = await fetch(APIURL);
+    const response = await fetch(urls.APIURL);
     const players = await response.json();
     return players;
   } catch (err) {
-    console.error("Uh oh, trouble fetching players!", err);
+    console.error('Uh oh, trouble fetching players!', err);
   }
 };
 
 const fetchSinglePlayer = async (playerId) => {
   try {
-    const response = await fetch(`${APIURL}/${playerId}`);
+    const response = await fetch(`${urls.APIURL}/${playerId}`);
     const singlePlayer = await response.json();
     return singlePlayer;
   } catch (err) {
@@ -34,36 +35,36 @@ const fetchSinglePlayer = async (playerId) => {
 const addNewPlayer = async (playerObj) => {
   try {
     console.log(playerObj);
-    const response = await fetch(APIURL, {
-      method: "POST",
+    const response = await fetch(urls.APIURL, {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(playerObj),
     });
     const newPlayer = await response.json();
     if (newPlayer.success) {
-      alert("New Player Successfully Added");
+      alert('New Player Successfully Added');
     } else {
       alert("Oops, there's a problem, check the data you sent.");
     }
     init();
   } catch (err) {
-    console.error("Oops, something went wrong with adding that player!", err);
+    console.error('Oops, something went wrong with adding that player!', err);
   }
 };
 
 const removePlayer = async (playerId) => {
   try {
-    const resp = await fetch(`${APIURL}/${playerId}`, {
-      method: "DELETE",
+    const resp = await fetch(`${urls.APIURL}/${playerId}`, {
+      method: 'DELETE',
     });
     const deletedSinglePlayer = await resp.json();
     console.log(deletedSinglePlayer);
     if (deletedSinglePlayer.success) {
-      alert("Player deleted successfully");
+      alert('Player deleted successfully');
     } else {
-      alert("Whoops, trouble removing player from the roster!`");
+      alert('Whoops, trouble removing player from the roster!`');
     }
   } catch (err) {
     console.error(
@@ -98,11 +99,11 @@ const renderAllPlayers = async (playersResponse) => {
     console.log(playersResponse);
     // console.log(playersResponse.data.players);
     let playerList = playersResponse.data.players;
-    console.log(playerList)
-    playerContainer.innerHTML = "";
+    console.log(playerList);
+    playerContainer.innerHTML = '';
     playerList.forEach((player) => {
-      const playersElement = document.createElement("div");
-      playersElement.classList.add("player");
+      const playersElement = document.createElement('div');
+      playersElement.classList.add('player');
       playersElement.innerHTML = `
       <div class= "card">
       <h2 class="player-name">${player.name}</h2>
@@ -116,8 +117,8 @@ const renderAllPlayers = async (playersResponse) => {
       playerContainer.appendChild(playersElement);
 
       // see details
-      const detailsButton = playersElement.querySelector(".details-button");
-      detailsButton.addEventListener("click", async (event) => {
+      const detailsButton = playersElement.querySelector('.details-button');
+      detailsButton.addEventListener('click', async (event) => {
         // your code here
         event.preventDefault();
         const singlePlayer = await fetchSinglePlayer(player.id);
@@ -134,8 +135,8 @@ const renderAllPlayers = async (playersResponse) => {
                     <button class="delete-button" id="delete-button" data-id="${player.id}">Delete</button>
         `;
 
-        const backButton = playerContainer.querySelector(".backButton");
-        backButton.addEventListener("click", async (evt) => {
+        const backButton = playerContainer.querySelector('.backButton');
+        backButton.addEventListener('click', async (evt) => {
           event.preventDefault();
 
           const allPlayers = await fetchAllPlayers();
@@ -143,16 +144,14 @@ const renderAllPlayers = async (playersResponse) => {
         });
 
         // delete player
-        const deleteButton = playerContainer.querySelector(".delete-button");
-        deleteButton.addEventListener("click", async (event) => {
+        const deleteButton = playerContainer.querySelector('.delete-button');
+        deleteButton.addEventListener('click', async (event) => {
           // your code here
-          if (confirm("Are you sure?")) {
+          if (confirm('Are you sure?')) {
             event.preventDefault(await removePlayer(player.id));
             init();
           } else {
-            
           }
-          
 
           //playersElement.appendChild(deleteButton);
         });
@@ -161,7 +160,7 @@ const renderAllPlayers = async (playersResponse) => {
       playersElement.appendChild(detailsButton);
     });
   } catch (err) {
-    console.error("Uh oh, trouble rendering players!", err);
+    console.error('Uh oh, trouble rendering players!', err);
   }
 };
 /**
@@ -171,12 +170,12 @@ const renderAllPlayers = async (playersResponse) => {
  */
 const fetchAllTeams = async () => {
   try {
-    const response = await fetch(APIURLTEAMS);
+    const response = await fetch(urls.APIURLTEAMS);
     const teams = await response.json();
 
     return teams;
   } catch (err) {
-    console.error("Uh oh, trouble fetching Teams!", err);
+    console.error('Uh oh, trouble fetching Teams!', err);
   }
 };
 function renderSelectTeams(teams) {
@@ -190,7 +189,7 @@ function renderSelectTeams(teams) {
       `;
     }
 
-    render = render + "</select>";
+    render = render + '</select>';
     return render;
   } catch (error) {
     `Whoops, trouble rendering teams  `, err;
@@ -203,24 +202,23 @@ function renderSelectTeams(teams) {
 const renderNewPlayerForm = () => {
   try {
   } catch (err) {
-    console.error("Uh oh, trouble rendering the new player form!", err);
+    console.error('Uh oh, trouble rendering the new player form!', err);
   }
 };
 
 //   createNewPlayer();
-const addPlayerButton = document.getElementById("addPlayer");
+const addPlayerButton = document.getElementById('addPlayer');
 
-addPlayerButton.addEventListener("click", async (event) => {
+addPlayerButton.addEventListener('click', async (event) => {
   event.preventDefault();
   addNewPlayerForm();
 });
 const addNewPlayerForm = async () => {
-  let teams = "";
+  let teams = '';
   let obtTeams = await fetchAllTeams();
   teams = renderSelectTeams(obtTeams);
   playerContainer.innerHTML = ``;
-  newPlayerFormContainer.innerHTML =
-    `
+  newPlayerFormContainer.innerHTML = `
 
     <form class="new-player-form">
       <h2 class="subTitle">Create New Player</h2>
@@ -251,61 +249,61 @@ const addNewPlayerForm = async () => {
 
     </form>
     `;
-    let form = newPlayerFormContainer.querySelector("form");
-    form.addEventListener("submit", async (event) => {
+  let form = newPlayerFormContainer.querySelector('form');
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    let newPlayerData = {
+      name: form.name.value,
+      breed: form.breed.value,
+      status: form.status.value,
+      imageUrl: form.imageUrl.value,
+      teamId: form.teamid.value,
+    };
+    await addNewPlayer(newPlayerData);
+    newPlayerFormContainer.innerHTML = ``;
+
+    const newPlayer = await fetchAllPlayers();
+    renderAllPlayers(newPlayer);
+
+    form.name.value = '';
+    form.breed.value = '';
+    form.status.value = '';
+    form.imageUrl.value = '';
+    form.teamid.value = '';
+  });
+};
+// generate team page
+function generateTeamListPage(teams) {
+  const teamListContainer = document.getElementById('all-players-container');
+  teamListContainer.innerHTML = '';
+
+  const header = document.createElement('h1');
+  header.innerText = 'Teams';
+  teamListContainer.appendChild(header);
+
+  const teamList = document.createElement('ul');
+  teamList.classList.add('team-list');
+  teamListContainer.appendChild(teamList);
+
+  teams.forEach((team) => {
+    const teamItem = document.createElement('li');
+    const teamLink = document.createElement('a');
+    teamLink.href = `#${team.id}`;
+    teamLink.innerText = `Team ${team.id}`;
+    teamItem.appendChild(teamLink);
+    teamList.appendChild(teamItem);
+
+    teamLink.addEventListener('click', async (event) => {
       event.preventDefault();
-  
-      let newPlayerData = {
-        name: form.name.value,
-        breed: form.breed.value,
-        status: form.status.value,
-        imageUrl: form.imageUrl.value,
-        teamId: form.teamid.value,
-      };
-      await addNewPlayer(newPlayerData);
-      newPlayerFormContainer.innerHTML = ``;
-  
-      const newPlayer = await fetchAllPlayers();
-      renderAllPlayers(newPlayer);
-  
-      form.name.value = "";
-      form.breed.value = "";
-      form.status.value = "";
-      form.imageUrl.value = "";
-      form.teamid.value = "";
+      const playersResponse = await fetchAllPlayers();
+      const players = playersResponse.data.players;
+      const teamPlayers = players.filter((player) => player.teamId === team.id);
+      const playerNames = teamPlayers.map((player) => player.name);
+      alert(playerNames.join(', '));
     });
-  };
-  // generate team page
-  function generateTeamListPage(teams) {
-    const teamListContainer = document.getElementById('all-players-container');
-    teamListContainer.innerHTML = '';
-  
-    const header = document.createElement('h1');
-    header.innerText = 'Teams';
-    teamListContainer.appendChild(header);
-  
-    const teamList = document.createElement('ul');
-    teamList.classList.add('team-list');
-    teamListContainer.appendChild(teamList);
-  
-    teams.forEach((team) => {
-      const teamItem = document.createElement('li');
-      const teamLink = document.createElement('a');
-      teamLink.href = `#${team.id}`;
-      teamLink.innerText = `Team ${team.id}`;
-      teamItem.appendChild(teamLink);
-      teamList.appendChild(teamItem);
-  
-      teamLink.addEventListener('click', async (event) => {
-        event.preventDefault();
-        const playersResponse = await fetchAllPlayers();
-        const players = playersResponse.data.players;
-        const teamPlayers = players.filter((player) => player.teamId === team.id);
-        const playerNames = teamPlayers.map((player) => player.name);
-        alert(playerNames.join(', '));
-      });
-    });
-  }
+  });
+}
 
 // Handle Show Teams link click event
 function handleShowTeamsClick(event) {
@@ -328,11 +326,9 @@ function handleShowTeamsClick(event) {
 const showTeamsLink = document.getElementById('showTeams');
 showTeamsLink.addEventListener('click', handleShowTeamsClick);
 
+const init = async () => {
+  const playersResponse = await fetchAllPlayers();
+  renderAllPlayers(playersResponse);
+};
 
-
-  const init = async () => {
-    const playersResponse = await fetchAllPlayers();
-    renderAllPlayers(playersResponse);
-  };
-  
-  init();
+init();

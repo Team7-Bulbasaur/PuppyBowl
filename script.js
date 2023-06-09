@@ -8,14 +8,14 @@ const urls = teamUrl();
 // Use the APIURL variable for fetch requests
 // const APIURL = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/players`;
 // const APIURLTEAMS = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/teams`;
-
+//new commits
 /**
  * It fetches all players from the API and returns them
  * @returns An array of objects.
  */
 const fetchAllPlayers = async () => {
   try {
-    const response = await fetch(APIURL);
+    const response = await fetch(urls.APIURL);
     const players = await response.json();
     return players;
   } catch (err) {
@@ -25,7 +25,7 @@ const fetchAllPlayers = async () => {
 
 const fetchSinglePlayer = async (playerId) => {
   try {
-    const response = await fetch(`${APIURL}/${playerId}`);
+    const response = await fetch(`${urls.APIURL}/${playerId}`);
     const singlePlayer = await response.json();
     return singlePlayer;
   } catch (err) {
@@ -36,7 +36,7 @@ const fetchSinglePlayer = async (playerId) => {
 const addNewPlayer = async (playerObj) => {
   try {
     console.log(playerObj);
-    const response = await fetch(APIURL, {
+    const response = await fetch(urls.APIURL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -57,7 +57,7 @@ const addNewPlayer = async (playerObj) => {
 
 const removePlayer = async (playerId) => {
   try {
-    const resp = await fetch(`${APIURL}/${playerId}`, {
+    const resp = await fetch(`${urls.APIURL}/${playerId}`, {
       method: "DELETE",
     });
     const deletedSinglePlayer = await resp.json();
@@ -173,7 +173,7 @@ const renderAllPlayers = async (playersResponse) => {
  */
 const fetchAllTeams = async () => {
   try {
-    const response = await fetch(APIURLTEAMS);
+    const response = await fetch(urls.APIURLTEAMS);
     const teams = await response.json();
 
     return teams;
@@ -312,7 +312,7 @@ const addNewPlayerForm = async () => {
 // Handle Show Teams link click event
 function handleShowTeamsClick(event) {
   event.preventDefault();
-  fetch(APIURLTEAMS)
+  fetch(urls.APIURLTEAMS)
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {

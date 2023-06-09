@@ -1,11 +1,13 @@
-const playerContainer = document.getElementById("all-players-container");
-const newPlayerFormContainer = document.getElementById("new-player-form");
+import {teamUrl} from './teamsUrl.js';
+const playerContainer = document.getElementById('all-players-container');
+const newPlayerFormContainer = document.getElementById('new-player-form');
+const urls = teamUrl();
 
 // Add your cohort name to the cohortName variable below, replacing the 'COHORT-NAME' placeholder
-const cohortName = "2302-ACC-PT-WEB-PT-C";
+// const cohortName = "2302-ACC-PT-WEB-PT-C";
 // Use the APIURL variable for fetch requests
-const APIURL = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/players`;
-const APIURLTEAMS = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/teams`;
+// const APIURL = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/players`;
+// const APIURLTEAMS = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/teams`;
 
 /**
  * It fetches all players from the API and returns them

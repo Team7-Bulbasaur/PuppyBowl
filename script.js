@@ -8,7 +8,7 @@ const urls = teamUrl();
 // Use the APIURL variable for fetch requests
 // const APIURL = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/players`;
 // const APIURLTEAMS = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/teams`;
-
+//new commits
 /**
  * It fetches all players from the API and returns them
  * @returns An array of objects.
